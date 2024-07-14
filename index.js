@@ -7,7 +7,20 @@ async function main() {
 
 
     // await page.screenshot({ path: 'example.png', fullPage: true })
-    await page.pdf({ path: 'example.pdf', format: 'A4' })
+    // await page.pdf({ path: 'example.pdf', format: 'A4' })
+
+
+    // const html = await page.content()
+    // console.log(html)
+
+    // const title = await page.evaluate(() => document.title)
+    // console.log(title);
+
+    // const text = await page.evaluate(() => document.body.innerText)
+    // console.log(text);
+
+    const links = await page.evaluate(() => Array.from(document.querySelectorAll('a'), (e) => e.href))
+    console.log(links)
 
     await browser.close()
 }

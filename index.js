@@ -19,8 +19,22 @@ async function main() {
     // const text = await page.evaluate(() => document.body.innerText)
     // console.log(text);
 
-    const links = await page.evaluate(() => Array.from(document.querySelectorAll('a'), (e) => e.href))
-    console.log(links)
+    // const links = await page.evaluate(() => Array.from(document.querySelectorAll('a'), (e) => e.href))
+    // console.log(links)
+
+    // const courses = await page.evaluate(() => Array.from(document.querySelectorAll('#cscourses .card'), (e) => ({
+    //     title: e.querySelector('.card-body h3').innerText,
+    //     level: e.querySelector('.card-body .level').innerText,
+    //     url: e.querySelector('.card-footer a').href,
+    //     // promo: e.querySelector('.card-footer .promo-code .promo').innerText
+    // })))
+
+    const courses = await page.$$eval('#cscourses .card', (elements) => elements.map(e => ({
+        title: e.querySelector('.card-body h3').innerText,
+        level: e.querySelector('.card-body .level').innerText,
+        url: e.querySelector('.card-footer a').href,
+    })))
+    console.log(courses)
 
     await browser.close()
 }

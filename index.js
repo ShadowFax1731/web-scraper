@@ -1,4 +1,5 @@
 const puppeteer = require('puppeteer')
+const fs = require('fs')
 
 async function main() {
     const browser = await puppeteer.launch()
@@ -35,6 +36,15 @@ async function main() {
         url: e.querySelector('.card-footer a').href,
     })))
     console.log(courses)
+
+    //Save data to file
+
+    fs.writeFile('courses.json', JSON.stringify(courses), (err) => {
+        if (err)
+            throw err
+
+        console.log('File Saved');
+    })
 
     await browser.close()
 }
